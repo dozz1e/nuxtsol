@@ -2,13 +2,27 @@
   <v-row justify="center" align="center" v-if="propiedad">
     <v-col cols="12">
       <h1>Propiedad</h1>
-      <span>{{ propiedad.title }}</span>
+      <!-- <span>{{ propiedad.title }}</span> -->
+      <pre>{{ propiedad }}</pre>
     </v-col>
   </v-row>
 </template>
 
 <script>
 export default {
+  head() {
+    return {
+      title: this.propiedad.seo.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.propiedad.seo.metaDesc,
+        },
+      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    };
+  },
   async asyncData(context) {
     return await context.$axios
       .post("https://marsolpropiedades.cl/data/graphql/", {
@@ -55,6 +69,8 @@ export default {
 							precio {
 								precio
 								precioUf
+								precioDesde
+      					precioUfDesde
 							}
 							seo {
 								metaDesc

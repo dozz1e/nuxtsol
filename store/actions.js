@@ -43,6 +43,8 @@ export default {
 						precio {
 							precio
 							precioUf
+							precioDesde
+      				precioUfDesde
 						}
 						slug
 						youtube {
